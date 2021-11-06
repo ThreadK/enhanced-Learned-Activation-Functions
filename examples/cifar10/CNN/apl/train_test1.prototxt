@@ -1,0 +1,8 @@
+name: "CIFAR100_full_train"
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase:
