@@ -5,4 +5,12 @@ layer {
   top: "data"
   top: "label"
   include {
-    phase:
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: false
+    crop_size: 32
+    mean_file: "mean.binaryproto"
+  }
+  data_param {
+    source: "leveldb3/train_lmdb/"
