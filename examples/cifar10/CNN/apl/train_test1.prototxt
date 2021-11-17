@@ -14,3 +14,15 @@ layer {
   }
   data_param {
     source: "leveldb3/train_lmdb/"
+    batch_size: 100
+    backend: LMDB
+  }
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TEST
+ 
