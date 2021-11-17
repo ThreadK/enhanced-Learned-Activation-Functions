@@ -25,4 +25,12 @@ layer {
   top: "label"
   include {
     phase: TEST
- 
+  }
+  transform_param {
+    mirror: false
+    crop_size: 32
+    mean_file: "mean.binaryproto"
+  }
+  data_param {
+    source: "leveldb3/test_lmdb/"
+    batc
