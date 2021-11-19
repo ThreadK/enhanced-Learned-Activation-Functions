@@ -33,4 +33,13 @@ layer {
   }
   data_param {
     source: "leveldb3/test_lmdb/"
-    batc
+    batch_size: 100
+    backend: LMDB
+  }
+}
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  convolution_param 
