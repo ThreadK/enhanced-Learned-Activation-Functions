@@ -53,4 +53,16 @@ layer {
     bias_filler {
       type: "constant"
     }
- 
+  }
+}
+layer {
+  name: "apl1"
+  type: "APL"
+  bottom: "conv1"
+  top: "conv1"
+  apl_param {
+    sums: 5
+    slope_filler {
+      type: "uniform"
+      min: -0.5
+      max: 0.5
