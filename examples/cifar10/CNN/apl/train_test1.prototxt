@@ -77,4 +77,15 @@ layer {
   name: "drop1_c"
   type: "Dropout"
   bottom: "conv1"
-  top: "conv1
+  top: "conv1"
+  dropout_param {
+    dropout_ratio: 0.25
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: M
