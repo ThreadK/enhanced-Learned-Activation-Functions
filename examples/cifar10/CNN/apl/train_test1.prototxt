@@ -88,4 +88,14 @@ layer {
   bottom: "conv1"
   top: "pool1"
   pooling_param {
-    pool: M
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "pool1"
+  top: "pool1_d"
+  dropout_param
