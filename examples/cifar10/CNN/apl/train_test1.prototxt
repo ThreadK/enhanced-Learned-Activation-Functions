@@ -121,4 +121,13 @@ layer {
   }
 }
 layer {
-  n
+  name: "apl2"
+  type: "APL"
+  bottom: "conv2"
+  top: "conv2"
+  apl_param {
+    sums: 5
+    slope_filler {
+      type: "uniform"
+      min: -0.5
+      max
