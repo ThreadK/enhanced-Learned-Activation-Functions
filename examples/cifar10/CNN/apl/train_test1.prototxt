@@ -163,4 +163,14 @@ layer {
   type: "Dropout"
   bottom: "pool2"
   top: "pool2_d"
-  dropout_param 
+  dropout_param {
+    dropout_ratio: 0.25
+  }
+}
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "pool2_d"
+  top: "conv3"
+  convolution_param {
+    num_output
