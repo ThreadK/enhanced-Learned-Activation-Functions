@@ -153,4 +153,14 @@ layer {
   bottom: "conv2"
   top: "pool2"
   pooling_param {
-   
+    pool: AVE
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "drop2"
+  type: "Dropout"
+  bottom: "pool2"
+  top: "pool2_d"
+  dropout_param 
