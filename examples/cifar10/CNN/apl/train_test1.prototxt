@@ -142,4 +142,15 @@ layer {
   name: "drop2_c"
   type: "Dropout"
   bottom: "conv2"
-  top: 
+  top: "conv2"
+  dropout_param {
+    dropout_ratio: 0.25
+  }
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2"
+  top: "pool2"
+  pooling_param {
+   
