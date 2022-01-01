@@ -206,4 +206,14 @@ layer {
 layer {
   name: "drop3_c"
   type: "Dropout"
-  bottom: "c
+  bottom: "conv3"
+  top: "conv3"
+  dropout_param {
+    dropout_ratio: 0.25
+  }
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv3"
+  top
