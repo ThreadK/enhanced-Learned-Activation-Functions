@@ -195,4 +195,15 @@ layer {
     slope_filler {
       type: "uniform"
       min: -0.5
-    
+      max: 0.5
+    }
+    offset_filler {
+      type: "gaussian"
+      std: 0.5
+    }
+  }
+}
+layer {
+  name: "drop3_c"
+  type: "Dropout"
+  bottom: "c
