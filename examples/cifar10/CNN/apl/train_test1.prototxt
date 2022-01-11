@@ -248,4 +248,13 @@ layer {
     }
   }
 }
-layer 
+layer {
+  name: "apl4"
+  type: "APL"
+  bottom: "ip1"
+  top: "ip1"
+  apl_param {
+    sums: 5
+    slope_filler {
+      type: "uniform"
+      min
