@@ -287,4 +287,17 @@ layer {
       std: 0.01
     }
     bias_filler {
-      type: "const
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "apl5"
+  type: "APL"
+  bottom: "ip2"
+  top: "ip2"
+  apl_param {
+    sums: 5
+    slope_filler {
+      type: "uniform"
+      
