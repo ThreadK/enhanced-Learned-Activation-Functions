@@ -340,4 +340,14 @@ layer {
   bottom: "ip3"
   bottom: "label"
   top: "accuracy"
-  incl
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "ip3"
+  bottom: "label"
+  top: "loss"
+}
