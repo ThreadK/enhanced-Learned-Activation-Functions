@@ -1,1 +1,6 @@
-# reduce the learning ra
+# reduce the learning rate after 8 epochs (4000 iters) by a factor of 10
+
+# The training protocol buffer definition
+net: "NIN_3Conv/apl/train_test1.prototxt"
+
+# tes
