@@ -3,4 +3,6 @@
 # The training protocol buffer definition
 net: "NIN_3Conv/apl/train_test1.prototxt"
 
-# tes
+# test_iter specifies how many forward passes the test should carry out.
+# In the case of MNIST, we have test batch size 100 and 100 test iterations,
+# covering the full
