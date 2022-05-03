@@ -9,4 +9,13 @@ net: "NIN_3Conv/apl/train_test1.prototxt"
 test_iter: 100
 # Carry out testing every 500 training iterations.
 test_interval: 2000
-# The base learning rate, momentum and the weight
+# The base learning rate, momentum and the weight decay of the network.
+base_lr: 0.05
+momentum: 0.1
+max_momentum: 0.9
+momentum_change_steps: 10000
+weight_decay: 0.0001
+
+device_id: 0
+
+# The learning r
