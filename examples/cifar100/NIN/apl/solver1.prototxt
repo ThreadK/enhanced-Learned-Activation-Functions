@@ -29,4 +29,17 @@ lr: 0.001
 lr_change: 310000
 lr: 0.0001
 lr_change: 320000
-lr: 0.00
+lr: 0.00001
+lr_change: 330000
+
+#lr_policy: "step"
+#gamma: 0.1
+#stepsize: 100000
+
+#lr_policy: "exp"
+#gamma: 0.99997
+
+#lr_policy: "inverse_t"
+#gamma: 10000
+
+#lr_policy
