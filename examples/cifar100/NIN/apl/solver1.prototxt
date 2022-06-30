@@ -56,4 +56,5 @@ max_iter: 1200000
 # snapshot intermediate results
 snapshot: 0
 snapshot_prefix: "NIN_3Conv/apl/models/apl_4"
-# solver mode: CPU or 
+# solver mode: CPU or GPU
+solver_mode: GPU

@@ -1,0 +1,139 @@
+
+name: "CIFAR10_full"
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+ 	transform_param {
+    mirror: true
+    crop_size: 32
+    mean_file: "mean.binaryproto"
+  }
+  data_param {
+    source: "leveldb3/train-leveldb/"
+    batch_size: 100
+		backend: LMDB
+  }
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 32
+    mean_file: "mean.binaryproto"
+  }
+  data_param {
+    source: "leveldb3/test-leveldb/"
+    batch_size: 100
+    backend: LMDB
+  }
+}
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    pad: 2
+    kernel_size: 5
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "apl1"
+  type: "APL"
+  bottom: "conv1"
+  top: "conv1"
+	param {
+		decay_mult: 10
+	}
+	param {
+		decay_mult: 10
+	}
+  apl_param {
+    sums: 1
+    slope_filler {
+      type: "uniform"
+      min: -0.5
+			max: 0.5
+    }
+    offset_filler {
+      type: "gaussian"
+      std: 0.5
+    }
+	}
+}
+layer {
+  name: "cccp1"
+  type: "Convolution"
+  bottom: "conv1"
+  top: "cccp1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 160
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "apl2"
+  type: "APL"
+  bottom: "cccp1"
+  top: "cccp1"
+	param {
+		decay_mult: 10
+	}
+	param {
+		decay_mult: 10
+	}
+  apl_param {
+    sums: 1
+    slope_filler {
+      type: "uniform"
+      min: -0.5
+			max: 0.5
+    }
+    offset_filler {
+      type: "gaussian"
+      std: 0.5
