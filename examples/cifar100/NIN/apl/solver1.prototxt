@@ -42,4 +42,13 @@ lr_change: 330000
 #lr_policy: "inverse_t"
 #gamma: 10000
 
-#lr_policy
+#lr_policy: "fixed"
+
+#lr_policy: "manual_step"
+#iter_change: 30
+#rate_mult: 0.1
+#min_rate: 0.00001 
+
+# Display every 100 iterations
+display: 200
+# The m
