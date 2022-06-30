@@ -51,4 +51,9 @@ lr_change: 330000
 
 # Display every 100 iterations
 display: 200
-# The m
+# The maximum number of iterations
+max_iter: 1200000
+# snapshot intermediate results
+snapshot: 0
+snapshot_prefix: "NIN_3Conv/apl/models/apl_4"
+# solver mode: CPU or 
