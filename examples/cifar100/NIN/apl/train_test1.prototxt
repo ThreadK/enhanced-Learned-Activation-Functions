@@ -449,3 +449,117 @@ layer {
   convolution_param {
     num_output: 192
     group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "apl8"
+  type: "APL"
+  bottom: "cccp5"
+  top: "cccp5"
+	param {
+		decay_mult: 10
+	}
+	param {
+		decay_mult: 10
+	}
+  apl_param {
+    sums: 1
+    slope_filler {
+      type: "uniform"
+      min: -0.5
+			max: 0.5
+    }
+    offset_filler {
+      type: "gaussian"
+      std: 0.5
+    }
+  }
+}
+layer {
+  name: "cccp6"
+  type: "Convolution"
+  bottom: "cccp5"
+  top: "cccp6"
+  param {
+    lr_mult: 0.1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 0.1
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 100
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "apl9"
+  type: "APL"
+  bottom: "cccp6"
+  top: "cccp6"
+	param {
+		decay_mult: 10
+	}
+	param {
+		decay_mult: 10
+	}
+  apl_param {
+    sums: 1
+    slope_filler {
+      type: "uniform"
+      min: -0.5
+			max: 0.5
+    }
+    offset_filler {
+      type: "gaussian"
+      std: 0.5
+    }
+  }
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "cccp6"
+  top: "pool3"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "pool3"
+  bottom: "label"
+  top: "accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "pool3"
+  bottom: "label"
+  top: "loss"
+}
