@@ -37,3 +37,14 @@ lr_change: 330000
 #stepsize: 100000
 
 #lr_policy: "exp"
+#gamma: 0.99997
+
+#lr_policy: "inverse_t"
+#gamma: 10000
+
+#lr_policy: "fixed"
+
+#lr_policy: "manual_step"
+#iter_change: 30
+#rate_mult: 0.1
+#min_rate: 0
