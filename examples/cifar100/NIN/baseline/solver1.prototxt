@@ -47,4 +47,11 @@ lr_change: 330000
 #lr_policy: "manual_step"
 #iter_change: 30
 #rate_mult: 0.1
-#min_rate: 0
+#min_rate: 0.00001 
+
+# Display every 100 iterations
+display: 200
+# The maximum number of iterations
+max_iter: 1200000
+# snapshot intermediate results
+snapshot: 0
