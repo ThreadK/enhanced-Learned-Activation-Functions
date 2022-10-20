@@ -55,3 +55,6 @@ display: 200
 max_iter: 1200000
 # snapshot intermediate results
 snapshot: 0
+snapshot_prefix: "NIN_3Conv/baseline/models/baseline_2"
+# solver mode: CPU or GPU
+solver_mode: GPU

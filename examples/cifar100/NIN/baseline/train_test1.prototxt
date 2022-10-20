@@ -1,0 +1,40 @@
+
+name: "CIFAR10_full"
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+ 	transform_param {
+    mirror: true
+    crop_size: 32
+    mean_file: "mean.binaryproto"
+  }
+  data_param {
+    source: "leveldb_padded/train-leveldb/"
+    batch_size: 100
+		backend: LMDB
+  }
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 32
+    mean_file: "mean.binaryproto"
+  }
+  data_param {
+    source: "leveldb_padded/test-leveldb/"
+    batch_size: 100
+    backend: LMDB
+  }
+}
