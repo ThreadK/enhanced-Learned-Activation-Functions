@@ -20,3 +20,6 @@ class Solver {
   explicit Solver(const SolverParameter& param);
   explicit Solver(const string& param_file);
   void Init(const SolverParameter& param);
+  void InitTrainNet();
+  void InitTestNets();
+  // The main entry of the solver function. In default, iter will be zero.
