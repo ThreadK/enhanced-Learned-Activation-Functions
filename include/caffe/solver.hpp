@@ -15,4 +15,8 @@ namespace caffe {
  * given the current state of the Net parameters.
  */
 template <typename Dtype>
-class Solver 
+class Solver {
+ public:
+  explicit Solver(const SolverParameter& param);
+  explicit Solver(const string& param_file);
+  void Init(const SolverParameter& param);
