@@ -25,4 +25,6 @@ class Solver {
   // The main entry of the solver function. In default, iter will be zero. Pass
   // in a non-zero iter number to resume training for a pre-trained net.
   virtual void Solve(const char* resume_file = NULL);
-  inline 
+  inline void Solve(const string resume_file) { Solve(resume_file.c_str()); }
+  void Step(int iters);
+  // The Restore function implements how one should restore the
