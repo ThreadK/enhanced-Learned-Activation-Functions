@@ -22,4 +22,7 @@ class Solver {
   void Init(const SolverParameter& param);
   void InitTrainNet();
   void InitTestNets();
-  // The main entry of the solver function. In default, iter will be zero.
+  // The main entry of the solver function. In default, iter will be zero. Pass
+  // in a non-zero iter number to resume training for a pre-trained net.
+  virtual void Solve(const char* resume_file = NULL);
+  inline 
