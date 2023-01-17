@@ -29,4 +29,7 @@ class Solver {
   void Step(int iters);
   // The Restore function implements how one should restore the solver to a
   // previously snapshotted state. You should implement the RestoreSolverState()
-  // function that restores the state from a SolverState 
+  // function that restores the state from a SolverState protocol buffer.
+  void Restore(const char* resume_file);
+  virtual ~Solver() {}
+  inline shared_ptr<Net<Dtype> > net() { return ne
