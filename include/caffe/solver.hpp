@@ -32,4 +32,11 @@ class Solver {
   // function that restores the state from a SolverState protocol buffer.
   void Restore(const char* resume_file);
   virtual ~Solver() {}
-  inline shared_ptr<Net<Dtype> > net() { return ne
+  inline shared_ptr<Net<Dtype> > net() { return net_; }
+  inline const vector<shared_ptr<Net<Dtype> > >& test_nets() {
+    return test_nets_;
+  }
+  int iter() { return iter_; }
+
+ protected:
+  // Get the up
