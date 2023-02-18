@@ -43,4 +43,9 @@ class Solver {
   virtual void ComputeUpdateValue() = 0;
   // The Solver::Snapshot function implements the basic snapshotting utility
   // that stores the learned net. You should implement the SnapshotSolverState()
-  // function that produces a SolverState protocol 
+  // function that produces a SolverState protocol buffer that needs to be
+  // written to disk together with the learned net.
+  void Snapshot();
+  // The test routine
+  void TestAll();
+  void Test(const i
