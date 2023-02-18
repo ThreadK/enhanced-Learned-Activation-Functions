@@ -41,4 +41,6 @@ class Solver {
  protected:
   // Get the update value for the current iteration.
   virtual void ComputeUpdateValue() = 0;
-  // The Solver::Snapshot function implements the basic snaps
+  // The Solver::Snapshot function implements the basic snapshotting utility
+  // that stores the learned net. You should implement the SnapshotSolverState()
+  // function that produces a SolverState protocol 
