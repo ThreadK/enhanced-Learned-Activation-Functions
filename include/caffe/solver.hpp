@@ -39,4 +39,6 @@ class Solver {
   int iter() { return iter_; }
 
  protected:
-  // Get the up
+  // Get the update value for the current iteration.
+  virtual void ComputeUpdateValue() = 0;
+  // The Solver::Snapshot function implements the basic snaps
