@@ -57,4 +57,15 @@ class Solver {
   int iter_;
   int current_step_;
   shared_ptr<Net<Dtype> > net_;
-  vector<shared_ptr<Net<Dtype> > > test_
+  vector<shared_ptr<Net<Dtype> > > test_nets_;
+
+	Dtype momentum_;
+	Dtype initial_momentum_;
+
+  DISABLE_COPY_AND_ASSIGN(Solver);
+};
+
+
+/**
+ * @brief Optimizes the parameters of a Net using
+ *     
