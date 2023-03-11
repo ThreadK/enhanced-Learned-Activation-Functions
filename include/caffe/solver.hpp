@@ -51,4 +51,10 @@ class Solver {
   void Test(const int test_net_id = 0);
   virtual void SnapshotSolverState(SolverState* state) = 0;
   virtual void RestoreSolverState(const SolverState& state) = 0;
-  void 
+  void DisplayOutputBlobs(const int net_id);
+
+  SolverParameter param_;
+  int iter_;
+  int current_step_;
+  shared_ptr<Net<Dtype> > net_;
+  vector<shared_ptr<Net<Dtype> > > test_
