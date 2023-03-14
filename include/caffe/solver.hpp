@@ -68,4 +68,9 @@ class Solver {
 
 /**
  * @brief Optimizes the parameters of a Net using
- *     
+ *        stochastic gradient descent (SGD) with momentum.
+ */
+template <typename Dtype>
+class SGDSolver : public Solver<Dtype> {
+ public:
+  e
