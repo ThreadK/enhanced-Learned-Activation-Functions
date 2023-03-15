@@ -73,4 +73,6 @@ class Solver {
 template <typename Dtype>
 class SGDSolver : public Solver<Dtype> {
  public:
-  e
+  explicit SGDSolver(const SolverParameter& param)
+      : Solver<Dtype>(param) { PreSolve(); }
+  explicit SGDSolver(const string& param_fil
