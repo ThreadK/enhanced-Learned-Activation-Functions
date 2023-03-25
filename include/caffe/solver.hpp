@@ -75,4 +75,10 @@ class SGDSolver : public Solver<Dtype> {
  public:
   explicit SGDSolver(const SolverParameter& param)
       : Solver<Dtype>(param) { PreSolve(); }
-  explicit SGDSolver(const string& param_fil
+  explicit SGDSolver(const string& param_file)
+      : Solver<Dtype>(param_file) { PreSolve(); }
+
+  const vector<shared_ptr<Blob<Dtype> > >& history() { return history_; }
+
+ protected:
+  void Pre
