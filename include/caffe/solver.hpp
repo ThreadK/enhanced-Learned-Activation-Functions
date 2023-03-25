@@ -81,4 +81,8 @@ class SGDSolver : public Solver<Dtype> {
   const vector<shared_ptr<Blob<Dtype> > >& history() { return history_; }
 
  protected:
-  void Pre
+  void PreSolve();
+  Dtype GetLearningRate();
+  virtual void ComputeUpdateValue();
+  virtual void ClipGradients();
+  virtual void SnapshotSolverSt
