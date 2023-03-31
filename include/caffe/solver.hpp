@@ -96,4 +96,7 @@ class SGDSolver : public Solver<Dtype> {
   DISABLE_COPY_AND_ASSIGN(SGDSolver);
 };
 
-templ
+template <typename Dtype>
+class NesterovSolver : public SGDSolver<Dtype> {
+ public:
+  explicit NesterovSolver(const SolverParame
