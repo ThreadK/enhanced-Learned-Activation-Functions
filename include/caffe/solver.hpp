@@ -99,4 +99,10 @@ class SGDSolver : public Solver<Dtype> {
 template <typename Dtype>
 class NesterovSolver : public SGDSolver<Dtype> {
  public:
-  explicit NesterovSolver(const SolverParame
+  explicit NesterovSolver(const SolverParameter& param)
+      : SGDSolver<Dtype>(param) {}
+  explicit NesterovSolver(const string& param_file)
+      : SGDSolver<Dtype>(param_file) {}
+
+ protected:
+  virtual void 
