@@ -105,4 +105,10 @@ class NesterovSolver : public SGDSolver<Dtype> {
       : SGDSolver<Dtype>(param_file) {}
 
  protected:
-  virtual void 
+  virtual void ComputeUpdateValue();
+
+  DISABLE_COPY_AND_ASSIGN(NesterovSolver);
+};
+
+template <typename Dtype>
+class AdaGradSolver : public SGDSolver<Dty
