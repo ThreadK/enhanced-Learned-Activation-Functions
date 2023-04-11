@@ -111,4 +111,8 @@ class NesterovSolver : public SGDSolver<Dtype> {
 };
 
 template <typename Dtype>
-class AdaGradSolver : public SGDSolver<Dty
+class AdaGradSolver : public SGDSolver<Dtype> {
+ public:
+  explicit AdaGradSolver(const SolverParameter& param)
+      : SGDSolver<Dtype>(param) { constructor_sanity_check(); }
+  explicit AdaGradSo
