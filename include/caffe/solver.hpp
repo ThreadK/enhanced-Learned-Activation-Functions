@@ -115,4 +115,9 @@ class AdaGradSolver : public SGDSolver<Dtype> {
  public:
   explicit AdaGradSolver(const SolverParameter& param)
       : SGDSolver<Dtype>(param) { constructor_sanity_check(); }
-  explicit AdaGradSo
+  explicit AdaGradSolver(const string& param_file)
+      : SGDSolver<Dtype>(param_file) { constructor_sanity_check(); }
+
+ protected:
+  virtual void ComputeUpdateValue();
+  void co
