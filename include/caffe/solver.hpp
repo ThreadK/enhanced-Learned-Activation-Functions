@@ -125,4 +125,11 @@ class AdaGradSolver : public SGDSolver<Dtype> {
         << "Momentum cannot be used with AdaGrad.";
   }
 
-  DISABLE_COPY_AND_ASSIGN(AdaGra
+  DISABLE_COPY_AND_ASSIGN(AdaGradSolver);
+};
+
+template <typename Dtype>
+Solver<Dtype>* GetSolver(const SolverParameter& param) {
+  SolverParameter_SolverType type = param.solver_type();
+
+  
