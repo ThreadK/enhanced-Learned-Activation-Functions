@@ -140,4 +140,11 @@ Solver<Dtype>* GetSolver(const SolverParameter& param) {
   case SolverParameter_SolverType_ADAGRAD:
       return new AdaGradSolver<Dtype>(param);
   default:
-      LOG(FATAL) << "Unknown SolverTy
+      LOG(FATAL) << "Unknown SolverType: " << type;
+  }
+  return (Solver<Dtype>*) NULL;
+}
+
+}  // namespace caffe
+
+#endif  // CAFFE_OPTIMIZATION_SOLVER_HPP_
