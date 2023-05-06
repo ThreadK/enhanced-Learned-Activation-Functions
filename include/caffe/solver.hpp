@@ -132,4 +132,8 @@ template <typename Dtype>
 Solver<Dtype>* GetSolver(const SolverParameter& param) {
   SolverParameter_SolverType type = param.solver_type();
 
-  
+  switch (type) {
+  case SolverParameter_SolverType_SGD:
+      return new SGDSolver<Dtype>(param);
+  case SolverParameter_SolverType_NESTEROV:
+    
