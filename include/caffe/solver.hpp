@@ -136,4 +136,8 @@ Solver<Dtype>* GetSolver(const SolverParameter& param) {
   case SolverParameter_SolverType_SGD:
       return new SGDSolver<Dtype>(param);
   case SolverParameter_SolverType_NESTEROV:
-    
+      return new NesterovSolver<Dtype>(param);
+  case SolverParameter_SolverType_ADAGRAD:
+      return new AdaGradSolver<Dtype>(param);
+  default:
+      LOG(FATAL) << "Unknown SolverTy
