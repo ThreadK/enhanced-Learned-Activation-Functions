@@ -12,4 +12,12 @@
 #include <ctime>
 #include <cstdio>
 #include <string.h>
-#include <loc
+#include <locale>
+
+using std::max;
+using std::min;
+
+namespace caffe {
+
+template <typename Dtype>
+	void APLLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& 
