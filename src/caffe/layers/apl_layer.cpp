@@ -20,4 +20,9 @@ using std::min;
 namespace caffe {
 
 template <typename Dtype>
-	void APLLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& 
+	void APLLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
+			const vector<Blob<Dtype>*>& top) {
+		CHECK_GE(bottom[0]->num_axes(), 2)
+			<< "Number of axes of bottom blob must be >=2.";
+
+		//
