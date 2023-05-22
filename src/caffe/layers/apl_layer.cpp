@@ -25,4 +25,9 @@ template <typename Dtype>
 		CHECK_GE(bottom[0]->num_axes(), 2)
 			<< "Number of axes of bottom blob must be >=2.";
 
-		//
+		// Figure out the dimensions
+		M_ = bottom[0]->num();
+		K_ = bottom[0]->count() / bottom[0]->num();
+		N_ = K_;
+
+		sums_ = this->layer_param_.apl_
