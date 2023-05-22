@@ -30,4 +30,8 @@ template <typename Dtype>
 		K_ = bottom[0]->count() / bottom[0]->num();
 		N_ = K_;
 
-		sums_ = this->layer_param_.apl_
+		sums_ = this->layer_param_.apl_param().sums();
+		save_mem_ = this->layer_param_.apl_param().save_mem();
+
+		// Check if we need to set up the weights
+		if (this->blobs_.size() > 0) 
