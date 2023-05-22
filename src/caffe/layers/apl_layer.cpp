@@ -34,4 +34,9 @@ template <typename Dtype>
 		save_mem_ = this->layer_param_.apl_param().save_mem();
 
 		// Check if we need to set up the weights
-		if (this->blobs_.size() > 0) 
+		if (this->blobs_.size() > 0) {
+			LOG(INFO) << "Skipping parameter initialization";
+		} 
+
+		if (this->blobs_.size() > 0) {
+			LOG(INFO) << "Skipping pa
