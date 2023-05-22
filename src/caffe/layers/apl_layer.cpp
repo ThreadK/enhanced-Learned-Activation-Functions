@@ -39,4 +39,9 @@ template <typename Dtype>
 		} 
 
 		if (this->blobs_.size() > 0) {
-			LOG(INFO) << "Skipping pa
+			LOG(INFO) << "Skipping parameter initialization";
+		} else {
+			this->blobs_.resize(2);
+
+			shared_ptr<Filler<Dtype> > slope_filler;
+			if (this->layer_param_.apl_p
