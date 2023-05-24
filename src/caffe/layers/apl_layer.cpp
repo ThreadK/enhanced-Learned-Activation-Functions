@@ -44,4 +44,7 @@ template <typename Dtype>
 			this->blobs_.resize(2);
 
 			shared_ptr<Filler<Dtype> > slope_filler;
-			if (this->layer_param_.apl_p
+			if (this->layer_param_.apl_param().has_slope_filler()) {
+				slope_filler.reset(GetFiller<Dtype>(this->layer_param_.apl_param().slope_filler()));
+			} else {
+				Fille
