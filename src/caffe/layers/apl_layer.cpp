@@ -47,4 +47,6 @@ template <typename Dtype>
 			if (this->layer_param_.apl_param().has_slope_filler()) {
 				slope_filler.reset(GetFiller<Dtype>(this->layer_param_.apl_param().slope_filler()));
 			} else {
-				Fille
+				FillerParameter slope_filler_param;
+				slope_filler_param.set_type("uniform");
+				slope_filler_param.set_min((Dtype) -0.5/((Dtype) sums_));
