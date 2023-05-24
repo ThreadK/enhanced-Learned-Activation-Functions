@@ -50,3 +50,7 @@ template <typename Dtype>
 				FillerParameter slope_filler_param;
 				slope_filler_param.set_type("uniform");
 				slope_filler_param.set_min((Dtype) -0.5/((Dtype) sums_));
+				slope_filler_param.set_max((Dtype)  0.5/((Dtype) sums_));
+				slope_filler.reset(GetFiller<Dtype>(slope_filler_param));
+			}
+			/
