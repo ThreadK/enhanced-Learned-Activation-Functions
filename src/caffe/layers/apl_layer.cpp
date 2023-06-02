@@ -53,4 +53,6 @@ template <typename Dtype>
 				slope_filler_param.set_max((Dtype)  0.5/((Dtype) sums_));
 				slope_filler.reset(GetFiller<Dtype>(slope_filler_param));
 			}
-			/
+			//shared_ptr<Filler<Dtype> > slope_filler(GetFiller<Dtype>(
+			//		this->layer_param_.apl_param().slope_filler()));
+			shared_ptr<Filler<Dtype> > 
