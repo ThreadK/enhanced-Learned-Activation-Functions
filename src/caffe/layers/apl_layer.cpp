@@ -55,4 +55,6 @@ template <typename Dtype>
 			}
 			//shared_ptr<Filler<Dtype> > slope_filler(GetFiller<Dtype>(
 			//		this->layer_param_.apl_param().slope_filler()));
-			shared_ptr<Filler<Dtype> > 
+			shared_ptr<Filler<Dtype> > offset_filler;
+			if (this->layer_param_.apl_param().has_offset_filler()) {
+				offset_filler.reset(GetFiller<Dtype>(this->layer_param_.a
