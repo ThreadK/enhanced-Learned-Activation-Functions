@@ -64,4 +64,9 @@ template <typename Dtype>
 				offset_filler_param.set_std(0.5);
 				offset_filler.reset(GetFiller<Dtype>(offset_filler_param));
 			}
-			//shared_ptr<Filler<Dtype> > offset_filler(GetFiller<Dt
+			//shared_ptr<Filler<Dtype> > offset_filler(GetFiller<Dtype>(
+			//		this->layer_param_.apl_param().offset_filler()));
+
+			//slope
+			this->blobs_[0].reset(new Blob<Dtype>(1, 1, sums_, K_));
+			CHECK(this->blobs
