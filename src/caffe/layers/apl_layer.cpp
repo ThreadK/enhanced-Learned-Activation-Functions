@@ -60,4 +60,8 @@ template <typename Dtype>
 				offset_filler.reset(GetFiller<Dtype>(this->layer_param_.apl_param().offset_filler()));
 			} else {
 				FillerParameter offset_filler_param;
-				offset_filler_param.set_type("gaussian
+				offset_filler_param.set_type("gaussian");
+				offset_filler_param.set_std(0.5);
+				offset_filler.reset(GetFiller<Dtype>(offset_filler_param));
+			}
+			//shared_ptr<Filler<Dtype> > offset_filler(GetFiller<Dt
