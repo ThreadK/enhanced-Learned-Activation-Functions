@@ -57,4 +57,7 @@ template <typename Dtype>
 			//		this->layer_param_.apl_param().slope_filler()));
 			shared_ptr<Filler<Dtype> > offset_filler;
 			if (this->layer_param_.apl_param().has_offset_filler()) {
-				offset_filler.reset(GetFiller<Dtype>(this->layer_param_.a
+				offset_filler.reset(GetFiller<Dtype>(this->layer_param_.apl_param().offset_filler()));
+			} else {
+				FillerParameter offset_filler_param;
+				offset_filler_param.set_type("gaussian
