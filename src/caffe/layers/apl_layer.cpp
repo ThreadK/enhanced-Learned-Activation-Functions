@@ -69,4 +69,8 @@ template <typename Dtype>
 
 			//slope
 			this->blobs_[0].reset(new Blob<Dtype>(1, 1, sums_, K_));
-			CHECK(this->blobs
+			CHECK(this->blobs_[0].get()->count());
+			slope_filler->Fill(this->blobs_[0].get());
+
+			//offset
+			this->blobs_[1].reset(new Blob<Dtype>(1, 1, sums_,
