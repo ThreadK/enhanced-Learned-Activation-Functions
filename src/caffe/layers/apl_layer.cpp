@@ -80,4 +80,7 @@ template <typename Dtype>
 
 
 		if (!save_mem_) {
-			temp_ex_neuron_sum_
+			temp_ex_neuron_sum_.reset(new SyncedMemory(M_ * K_ * sums_ * sizeof(Dtype)));
+
+			example_multiplier_.reset(new SyncedMemory(M_ * sizeof(Dtype)));
+			Dtype* example
