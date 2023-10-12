@@ -73,4 +73,11 @@ template <typename Dtype>
 			slope_filler->Fill(this->blobs_[0].get());
 
 			//offset
-			this->blobs_[1].reset(new Blob<Dtype>(1, 1, sums_,
+			this->blobs_[1].reset(new Blob<Dtype>(1, 1, sums_, K_));
+			CHECK(this->blobs_[1].get()->count());
+			offset_filler->Fill(this->blobs_[1].get());
+		}
+
+
+		if (!save_mem_) {
+			temp_ex_neuron_sum_
