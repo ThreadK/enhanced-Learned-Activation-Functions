@@ -83,4 +83,11 @@ template <typename Dtype>
 			temp_ex_neuron_sum_.reset(new SyncedMemory(M_ * K_ * sums_ * sizeof(Dtype)));
 
 			example_multiplier_.reset(new SyncedMemory(M_ * sizeof(Dtype)));
-			Dtype* example
+			Dtype* example_multiplier_data =
+				reinterpret_cast<Dtype*>(example_multiplier_->mutable_cpu_data());
+			for (int i = 0; i < M_; ++i) {
+				example_multiplier_data[i] = 1.;
+			}
+		}
+
+		
