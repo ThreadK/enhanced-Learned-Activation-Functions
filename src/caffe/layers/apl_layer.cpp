@@ -90,4 +90,10 @@ template <typename Dtype>
 			}
 		}
 
-		
+		maxs_.reset(new SyncedMemory(M_ * K_ * sums_ * sizeof(Dtype)));
+
+		LOG(INFO) << " Sums: " << sums_;
+	}
+
+template <typename Dtype>
+	v
