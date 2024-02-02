@@ -96,4 +96,7 @@ template <typename Dtype>
 	}
 
 template <typename Dtype>
-	v
+	void APLLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
+			const vector<Blob<Dtype>*>& top) {
+		CHECK_GE(bottom[0]->num_axes(), 2)
+			<< "Number of
