@@ -99,4 +99,9 @@ template <typename Dtype>
 	void APLLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 			const vector<Blob<Dtype>*>& top) {
 		CHECK_GE(bottom[0]->num_axes(), 2)
-			<< "Number of
+			<< "Number of axes of bottom blob must be >=2.";
+		top[0]->ReshapeLike(*bottom[0]);
+
+		if (bottom[0] == top[0]) {
+			// For in-place computation
+			inPl
