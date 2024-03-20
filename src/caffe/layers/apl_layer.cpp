@@ -104,4 +104,10 @@ template <typename Dtype>
 
 		if (bottom[0] == top[0]) {
 			// For in-place computation
-			inPl
+			inPlace_memory_.ReshapeLike(*bottom[0]);
+		}
+	}
+
+template <typename Dtype>
+	void APLLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+	
