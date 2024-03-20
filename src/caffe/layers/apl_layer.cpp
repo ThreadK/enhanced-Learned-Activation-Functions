@@ -110,4 +110,7 @@ template <typename Dtype>
 
 template <typename Dtype>
 	void APLLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
-	
+			const vector<Blob<Dtype>*>& top) {
+		/* Initialize */
+		const Dtype* bottom_data = bottom[0]->cpu_data();
+		Dtype* top_data = top[
