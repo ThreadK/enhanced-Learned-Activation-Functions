@@ -113,4 +113,7 @@ template <typename Dtype>
 			const vector<Blob<Dtype>*>& top) {
 		/* Initialize */
 		const Dtype* bottom_data = bottom[0]->cpu_data();
-		Dtype* top_data = top[
+		Dtype* top_data = top[0]->mutable_cpu_data();
+
+		const Dtype* neuron_weight = this->blobs_[0]->cpu_data();
+		const Dtype* neuron_offset = this->blobs_[1]->cpu
