@@ -127,4 +127,9 @@ template <typename Dtype>
 		}
 
 		/* Forward Prop */
-		for (int e=0; e
+		for (int e=0; e<M_; ++e) {
+			int exPos = e*K_;
+			int exPosSums = e*K_*sums_;
+			for (int k=0; k<K_; ++k) {
+				Dtype bottom_data_ex = bottom_data[exPos + k];
+				top_data[exPo
