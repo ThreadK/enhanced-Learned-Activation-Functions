@@ -116,4 +116,9 @@ template <typename Dtype>
 		Dtype* top_data = top[0]->mutable_cpu_data();
 
 		const Dtype* neuron_weight = this->blobs_[0]->cpu_data();
-		const Dtype* neuron_offset = this->blobs_[1]->cpu
+		const Dtype* neuron_offset = this->blobs_[1]->cpu_data();
+		const int count = bottom[0]->count();
+
+		Dtype* maxs_data = reinterpret_cast<Dtype*>(maxs_->mutable_cpu_data());
+
+		// For in-place computation
