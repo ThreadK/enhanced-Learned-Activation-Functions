@@ -122,3 +122,9 @@ template <typename Dtype>
 		Dtype* maxs_data = reinterpret_cast<Dtype*>(maxs_->mutable_cpu_data());
 
 		// For in-place computation
+		if (bottom[0] == top[0]) {
+			caffe_copy(count, bottom_data, inPlace_memory_.mutable_cpu_data());
+		}
+
+		/* Forward Prop */
+		for (int e=0; e
