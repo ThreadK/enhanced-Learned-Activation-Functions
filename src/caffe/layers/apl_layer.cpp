@@ -132,4 +132,8 @@ template <typename Dtype>
 			int exPosSums = e*K_*sums_;
 			for (int k=0; k<K_; ++k) {
 				Dtype bottom_data_ex = bottom_data[exPos + k];
-				top_data[exPo
+				top_data[exPos + k] = max(bottom_data_ex,Dtype(0));
+
+				int sumPos = k*sums_;
+				for (int s=0; s<sums_; ++s) {
+					maxs_data[exPosSums + sumPos + s] = max(-bott
