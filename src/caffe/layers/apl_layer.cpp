@@ -136,4 +136,11 @@ template <typename Dtype>
 
 				int sumPos = k*sums_;
 				for (int s=0; s<sums_; ++s) {
-					maxs_data[exPosSums + sumPos + s] = max(-bott
+					maxs_data[exPosSums + sumPos + s] = max(-bottom_data_ex + neuron_offset[sumPos + s], Dtype(0));
+					top_data[exPos + k] += neuron_weight[sumPos + s]*maxs_data[exPosSums + sumPos + s];
+				}
+			}
+		}
+	}
+
+template <
