@@ -143,4 +143,7 @@ template <typename Dtype>
 		}
 	}
 
-template <
+template <typename Dtype>
+	void APLLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
+			const vector<bool>& propagate_down,
+			const vector<Blob<Dtype>*>
