@@ -150,4 +150,8 @@ template <typename Dtype>
 		/* Initialize */
 		const Dtype* bottom_data = bottom[0]->cpu_data();
 		const Dtype* top_diff = top[0]->cpu_diff();
-		Dty
+		Dtype* bottom_diff = bottom[0]->mutable_cpu_diff();
+
+		const Dtype* neuron_weight = this->blobs_[0]->cpu_data();
+
+		Dtype* neuron_weight_diff = this->blobs_[0]->mu
