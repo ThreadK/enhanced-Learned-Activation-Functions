@@ -154,4 +154,9 @@ template <typename Dtype>
 
 		const Dtype* neuron_weight = this->blobs_[0]->cpu_data();
 
-		Dtype* neuron_weight_diff = this->blobs_[0]->mu
+		Dtype* neuron_weight_diff = this->blobs_[0]->mutable_cpu_diff();
+		Dtype* neuron_offset_diff = this->blobs_[1]->mutable_cpu_diff();
+
+		const Dtype* maxs_data = reinterpret_cast<const Dtype*>(maxs_->cpu_data());
+
+		/
