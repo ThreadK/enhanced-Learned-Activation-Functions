@@ -159,4 +159,10 @@ template <typename Dtype>
 
 		const Dtype* maxs_data = reinterpret_cast<const Dtype*>(maxs_->cpu_data());
 
-		/
+		// For in-place computation
+		if (top[0] == bottom[0]) {
+			bottom_data = inPlace_memory_.cpu_data();
+		}
+
+		for (int i=0; i < sums_*K_; ++i) {
+			neur
