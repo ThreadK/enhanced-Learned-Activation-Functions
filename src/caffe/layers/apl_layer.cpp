@@ -165,4 +165,10 @@ template <typename Dtype>
 		}
 
 		for (int i=0; i < sums_*K_; ++i) {
-			neur
+			neuron_weight_diff[i] = 0;
+			neuron_offset_diff[i] = 0;
+		}
+
+		/* Gradients to neuron layer*/
+		for (int e=0; e<M_; ++e) {
+			int exPo
