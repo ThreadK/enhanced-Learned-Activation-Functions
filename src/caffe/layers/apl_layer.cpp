@@ -171,4 +171,9 @@ template <typename Dtype>
 
 		/* Gradients to neuron layer*/
 		for (int e=0; e<M_; ++e) {
-			int exPo
+			int exPos = e*K_;
+			int exPosSums = e*K_*sums_;
+
+			for (int k=0; k<K_; ++k) {
+				Dtype sumTopDiff = top_diff[exPos + k];
+				Dtype sumBottomData = bottom_
