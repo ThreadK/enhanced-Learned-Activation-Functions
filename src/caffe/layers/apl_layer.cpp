@@ -176,4 +176,8 @@ template <typename Dtype>
 
 			for (int k=0; k<K_; ++k) {
 				Dtype sumTopDiff = top_diff[exPos + k];
-				Dtype sumBottomData = bottom_
+				Dtype sumBottomData = bottom_data[exPos + k];			
+
+				//bottom_diff[exPos + k] = sumTopDiff*(sumBottomData > 0);
+				bottom_diff[exPos + k] = sumBottomData > 0 ? sumTopDiff : 0;
+
