@@ -181,3 +181,8 @@ template <typename Dtype>
 				//bottom_diff[exPos + k] = sumTopDiff*(sumBottomData > 0);
 				bottom_diff[exPos + k] = sumBottomData > 0 ? sumTopDiff : 0;
 
+				int sumPos = k*sums_;
+				for (int s=0; s<sums_; ++s) {
+					Dtype maxGT_Zero = maxs_data[exPosSums + sumPos + s] > 0;
+
+					Dtype weight_d
