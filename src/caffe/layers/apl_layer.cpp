@@ -185,4 +185,6 @@ template <typename Dtype>
 				for (int s=0; s<sums_; ++s) {
 					Dtype maxGT_Zero = maxs_data[exPosSums + sumPos + s] > 0;
 
-					Dtype weight_d
+					Dtype weight_diff = sumTopDiff*maxs_data[exPosSums + sumPos + s];
+					Dtype offset_diff = sumTopDiff*neuron_weight[sumPos + s]*maxGT_Zero;
+
