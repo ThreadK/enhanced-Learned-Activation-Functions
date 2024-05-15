@@ -188,3 +188,7 @@ template <typename Dtype>
 					Dtype weight_diff = sumTopDiff*maxs_data[exPosSums + sumPos + s];
 					Dtype offset_diff = sumTopDiff*neuron_weight[sumPos + s]*maxGT_Zero;
 
+					neuron_weight_diff[sumPos + s] += weight_diff;
+					neuron_offset_diff[sumPos + s] += offset_diff;
+
+					//Propagate down gradie
