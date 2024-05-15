@@ -191,4 +191,15 @@ template <typename Dtype>
 					neuron_weight_diff[sumPos + s] += weight_diff;
 					neuron_offset_diff[sumPos + s] += offset_diff;
 
-					//Propagate down gradie
+					//Propagate down gradients to lower layer
+					bottom_diff[exPos + k] += -offset_diff;
+				}
+			}
+		}
+	}
+
+#ifdef CPU_ONLY
+STUB_GPU(APLLayer);
+#endif
+
+INSTANTIATE_CLASS(
