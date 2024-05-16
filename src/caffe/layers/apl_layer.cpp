@@ -202,4 +202,7 @@ template <typename Dtype>
 STUB_GPU(APLLayer);
 #endif
 
-INSTANTIATE_CLASS(
+INSTANTIATE_CLASS(APLLayer);
+REGISTER_LAYER_CLASS(APL);
+
+}  // namespace caffe
