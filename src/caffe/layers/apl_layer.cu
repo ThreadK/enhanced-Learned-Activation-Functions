@@ -237,3 +237,11 @@ template <typename Dtype>
 		if (propagate_down[0]) {
 			for (int s=0; s<sums_; ++s) {
 				ComputeBottomDiffSum<Dtype><<<CAFFE_GET_BLOCKS(M_*K_), CAFFE_CUDA_NUM_THREADS>>>(M_*K_, s, bottom_diff, bottom_data, neuron_weight, maxs_data, top_diff, sums_, K_);
+				CUDA_POST_KERNEL_CHECK;
+			}
+		}
+	}
+
+INSTANTIATE_LAYER_GPU_FUNCS(APLLayer);
+
+}  // namespace caffe
