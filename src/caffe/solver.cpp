@@ -185,3 +185,164 @@ void Solver<Dtype>::Step(int iters) {
 			clock_t test_start = clock();
       TestAll();
 			clock_t test_end = clock();
+			test_time = (double)(test_end - test_start)/CLOCKS_PER_SEC;
+    }
+
+    const bool display = param_.display() && iter_ % param_.display() == 0;
+    net_->set_debug_info(display && param_.debug_info());
+    Dtype loss = net_->ForwardBackward(bottom_vec);
+    if (losses.size() < average_loss) {
+      losses.push_back(loss);
+      int size = losses.size();
+      smoothed_loss = (smoothed_loss * (size - 1) + loss) / size;
+    } else {
+      int idx = (iter_ - start_iter) % average_loss;
+      smoothed_loss += (loss - losses[idx]) / average_loss;
+      losses[idx] = loss;
+    }
+    if (display) {
+			clock_t time_end = clock();
+			double time_elapsed = (double)(time_end - time_start)/CLOCKS_PER_SEC - test_time;
+			time_start = clock();
+			test_time = 0.;
+
+      LOG(INFO) << "Iteration " << iter_ << ", loss = " << smoothed_loss << ", Time elapsed: " << time_elapsed;
+			LOG(INFO) << "Iteration " << iter_ << ", momentum = " << momentum_;
+
+      const vector<Blob<Dtype>*>& result = net_->output_blobs();
+      int score_index = 0;
+      for (int j = 0; j < result.size(); ++j) {
+        const Dtype* result_vec = result[j]->cpu_data();
+        const string& output_name =
+            net_->blob_names()[net_->output_blob_indices()[j]];
+        const Dtype loss_weight =
+            net_->blob_loss_weights()[net_->output_blob_indices()[j]];
+        for (int k = 0; k < result[j]->count(); ++k) {
+          ostringstream loss_msg_stream;
+          if (loss_weight) {
+            loss_msg_stream << " (* " << loss_weight
+                            << " = " << loss_weight * result_vec[k] << " loss)";
+          }
+          LOG(INFO) << "    Train net output #"
+              << score_index++ << ": " << output_name << " = "
+              << result_vec[k] << loss_msg_stream.str();
+        }
+      }
+    }
+
+    ComputeUpdateValue();
+    net_->Update();
+
+    // Save a snapshot if needed.
+    if (param_.snapshot() && (iter_ + 1) % param_.snapshot() == 0) {
+      Snapshot();
+    }
+
+ }
+}
+
+template <typename Dtype>
+void Solver<Dtype>::Solve(const char* resume_file) {
+  LOG(INFO) << "Solving " << net_->name();
+  LOG(INFO) << "Learning Rate Policy: " << param_.lr_policy();
+
+  if (resume_file) {
+    LOG(INFO) << "Restoring previous solver status from " << resume_file;
+    Restore(resume_file);
+  }
+
+  // For a network that is trained by the solver, no bottom or top vecs
+  // should be given, and we will just provide dummy vecs.
+  Step(param_.max_iter() - iter_);
+  // If we haven't already, save a snapshot after optimization, unless
+  // overridden by setting snapshot_after_train := false
+  if (param_.snapshot_after_train()
+      && (!param_.snapshot() || iter_ % param_.snapshot() != 0)) {
+    Snapshot();
+  }
+  // After the optimization is done, run an additional train and test pass to
+  // display the train and test loss/outputs if appropriate (based on the
+  // display and test_interval settings, respectively).  Unlike in the rest of
+  // training, for the train net we only run a forward pass as we've already
+  // updated the parameters "max_iter" times -- this final pass is only done to
+  // display the loss, which is computed in the forward pass.
+  if (param_.display() && iter_ % param_.display() == 0) {
+    Dtype loss;
+    net_->ForwardPrefilled(&loss);
+    LOG(INFO) << "Iteration " << iter_ << ", loss = " << loss;
+  }
+  if (param_.test_interval() && iter_ % param_.test_interval() == 0) {
+    TestAll();
+  }
+  LOG(INFO) << "Optimization Done.";
+}
+
+
+template <typename Dtype>
+void Solver<Dtype>::TestAll() {
+  for (int test_net_id = 0; test_net_id < test_nets_.size(); ++test_net_id) {
+    Test(test_net_id);
+  }
+}
+
+template <typename Dtype>
+void Solver<Dtype>::Test(const int test_net_id) {
+	clock_t test_start = clock();
+
+  LOG(INFO) << "Iteration " << iter_
+            << ", Testing net (#" << test_net_id << ")";
+  CHECK_NOTNULL(test_nets_[test_net_id].get())->
+      ShareTrainedLayersWith(net_.get());
+  vector<Dtype> test_score;
+  vector<int> test_score_output_id;
+  vector<Blob<Dtype>*> bottom_vec;
+  const shared_ptr<Net<Dtype> >& test_net = test_nets_[test_net_id];
+  Dtype loss = 0;
+  for (int i = 0; i < param_.test_iter(test_net_id); ++i) {
+    Dtype iter_loss;
+    const vector<Blob<Dtype>*>& result =
+        test_net->Forward(bottom_vec, &iter_loss);
+    if (param_.test_compute_loss()) {
+      loss += iter_loss;
+    }
+    if (i == 0) {
+      for (int j = 0; j < result.size(); ++j) {
+        const Dtype* result_vec = result[j]->cpu_data();
+        for (int k = 0; k < result[j]->count(); ++k) {
+          test_score.push_back(result_vec[k]);
+          test_score_output_id.push_back(j);
+        }
+      }
+    } else {
+      int idx = 0;
+      for (int j = 0; j < result.size(); ++j) {
+        const Dtype* result_vec = result[j]->cpu_data();
+        for (int k = 0; k < result[j]->count(); ++k) {
+          test_score[idx++] += result_vec[k];
+        }
+      }
+    }
+  }
+  if (param_.test_compute_loss()) {
+    loss /= param_.test_iter(test_net_id);
+    LOG(INFO) << "Test loss: " << loss;
+  }
+  for (int i = 0; i < test_score.size(); ++i) {
+    const int output_blob_index =
+        test_net->output_blob_indices()[test_score_output_id[i]];
+    const string& output_name = test_net->blob_names()[output_blob_index];
+    const Dtype loss_weight = test_net->blob_loss_weights()[output_blob_index];
+    ostringstream loss_msg_stream;
+    const Dtype mean_score = test_score[i] / param_.test_iter(test_net_id);
+    if (loss_weight) {
+      loss_msg_stream << " (* " << loss_weight
+                      << " = " << loss_weight * mean_score << " loss)";
+    }
+		if (output_name == "accuracy") {
+			LOG(INFO) << "    Test net output #" << i << ": " << output_name << " = "
+					<< mean_score*100. << " ("  << 100.-(mean_score*100.) << ")" << loss_msg_stream.str();
+		} else {
+    	LOG(INFO) << "    Test net output #" << i << ": " << output_name << " = "
+      	  << mean_score << loss_msg_stream.str();
+		}
+  }
