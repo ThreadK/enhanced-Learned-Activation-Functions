@@ -1,1 +1,1 @@
-==========================================\nIntroduction\n==========================================\nThis repository is managed by ThreadK and is dedicated to reproducing and enhancing research on L
+==========================================\nIntroduction\n==========================================\nThis repository is managed by ThreadK and is dedicated to reproducing and enhancing research on Learning Activation Functions to Improve Deep Neural Networks. This is a learnable activation function for neural networks, which tests show outp
